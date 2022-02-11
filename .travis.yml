@@ -1,0 +1,26 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t purnima/react-test -f ./client/Dockerfile.dev ./client
+
+
+script:
+  - docker run -e CI=true purnima/react-test npm test -- --coverage  
+
+after_success:
+  - docker build -t purnima/multi-client  ./client
+  - docker build -t purnima/multi-server  ./server
+  - docker build -t purnima/multi-worker   ./worker
+  - docker build -t purnima/multi-nginx    ./nginx 
+
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+
+  - docker push -t purnima/multi-client
+  - docker push -t purnima/multi-server
+  - docker push -t purnima/multi-worker
+  - docker push -t purnima/multi-nginx
+
