@@ -11,10 +11,10 @@ script:
   - docker run -e CI=true purnima/react-test npm test -- --coverage  
 
 after_success:
-  - docker build -t purnima/multi-client  ./client
-  - docker build -t purnima/multi-server  ./server
-  - docker build -t purnima/multi-worker   ./worker
-  - docker build -t purnima/multi-nginx    ./nginx 
+  - docker build -t vkspoorna/multi-client  ./client
+  - docker build -t vkspoorna/multi-server  ./server
+  - docker build -t vkspoorna/multi-worker   ./worker
+  - docker build -t vkspoorna/multi-nginx    ./nginx 
 
 
   - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
