@@ -19,8 +19,8 @@ after_success:
 
   - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
 
-  - docker push -t purnima/multi-client
-  - docker push -t purnima/multi-server
-  - docker push -t purnima/multi-worker
-  - docker push -t purnima/multi-nginx
+  - docker push  purnima/multi-client
+  - docker push  purnima/multi-server
+  - docker push  purnima/multi-worker
+  - docker push  purnima/multi-nginx
 
